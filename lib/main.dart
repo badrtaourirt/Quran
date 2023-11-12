@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quran/quran.dart' as quran;
 
+import 'Screens/QuranPage.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +32,6 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-// ... (imports remain unchanged)
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
@@ -43,8 +44,14 @@ class _MyHomePageState extends State<MyHomePage> {
             itemCount: quran.getVerseCount(18),
             itemBuilder: (context, index) {
               return QuranVerseItem(verseIndex: index + 1, onTap: () {
-                // Handle the tap event for the verse item
-                // You can add your custom logic here
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+
+                    builder: (context) => SecondPage(message: index + 1),
+                  ),
+                );
                 print('Verse ${quran.getVerse(18, index + 1, verseEndSymbol: true)} tapped!');
               });
             },
@@ -54,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 
 class QuranVerseItem extends StatelessWidget {
   final int verseIndex;
