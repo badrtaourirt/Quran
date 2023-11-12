@@ -63,14 +63,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Row(
 
 
-                        children: [ 
+                        children: [
 
                           Text(quran.getSurahNameArabic(index+1),
                               textAlign: TextAlign.right),
 
                         ],
 
-                      ),
+                      ), 
 
                   );
 
