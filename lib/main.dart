@@ -12,13 +12,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -33,52 +30,100 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+// ... (imports remain unchanged)
+
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: ListView.builder(
+            itemCount: quran.getVerseCount(18),
+            itemBuilder: (context, index) {
+              return QuranVerseItem(verseIndex: index + 1, onTap: () {
+                // Handle the tap event for the verse item
+                // You can add your custom logic here
+                print('Verse ${quran.getVerse(18, index + 1, verseEndSymbol: true)} tapped!');
+              });
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class QuranVerseItem extends StatelessWidget {
+  final int verseIndex;
+  final VoidCallback onTap;
+
+  const QuranVerseItem({Key? key, required this.verseIndex, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Container for verse index
+            Container(
+              height: 50,
+              width: 50,
+              color: Colors.black,
+              margin: EdgeInsets.all(2),
+              child: Center(
+                child: Text(
+                  verseIndex.toString(),
+                  textAlign: TextAlign.right,
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            ),
+            // Container for surah name
+            Container(
+              height: 50,
+              width: 260,
+              color: Colors.white,
+              margin: EdgeInsets.all(2),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    quran.getSurahNameEnglish(verseIndex),
+                    textAlign: TextAlign.right,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    quran.getSurahNameArabic(verseIndex),
+                    textAlign: TextAlign.right,
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+            // Container for verse index (again)
+            Container(
+              height: 50,
+              width: 50,
+              color: Colors.black,
+              margin: EdgeInsets.all(2),
+              child: Center(
+                child: Text(
+                  verseIndex.toString(),
+                  textAlign: TextAlign.right,
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-        body: SafeArea(
-        child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: ListView.builder(
-                itemCount: quran.getVerseCount(9),
-                itemBuilder: (context, index) {
-                  return
-
-                  Container(
-
-                      height: 50,
-
-                      child: Row(
-
-
-                        children: [
-
-                          Text(quran.getSurahNameArabic(index+1),
-                              textAlign: TextAlign.right),
-
-                        ],
-
-                      ), 
-
-                  );
-
-
-        },
-          ),
-    ),
-        ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
