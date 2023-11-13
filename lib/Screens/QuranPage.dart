@@ -18,11 +18,11 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(quran.getSurahName(widget.message)),
+        title: Text(quran.getSurahNameArabic(widget.message)),
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(0.0),
           child: PageView.builder(
             itemCount: (quran.getVerseCount(widget.message) / itemsPerPage).ceil(),
             itemBuilder: (context, index) {
@@ -60,19 +60,55 @@ class VerseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: endVerseIndex - startVerseIndex + 1,
-      itemBuilder: (context, index) {
-        final verseIndex = startVerseIndex + index;
-
-        return ListTile(
-          title: Text(
-            quran.getVerse(message, verseIndex, verseEndSymbol: true),
-            textAlign: TextAlign.right,
-            style: TextStyle(color: Colors.black, fontSize: 20),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          width: double.infinity,
+          height: 100.0,
+          color: Colors.blue,
+          child: Center(
+            child: Text(
+              quran.getSurahNameArabic(message),
+              style: TextStyle(color: Colors.white, fontSize: 40.0),
+            ),
           ),
-        );
-      },
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height - 180, // Adjust height as needed
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage("https://clipart-library.com/images/ki8ok46AT.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              ListView.builder(
+                padding: EdgeInsets.only(top: 50.0, bottom: 50.0), // Adjust padding as needed
+                itemCount: endVerseIndex - startVerseIndex + 1,
+                itemBuilder: (context, index) {
+                  final verseIndex = startVerseIndex + index;
+
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                      child: Text(
+                        quran.getVerse(message, verseIndex, verseEndSymbol: true),
+                        textAlign: TextAlign.right,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
