@@ -73,7 +73,7 @@ class VerseList extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 40.0),
             ),
           ),
-        ),
+        ), 
         Container(
           height: MediaQuery.of(context).size.height - 180, // Adjust height as needed
           child: Stack(
