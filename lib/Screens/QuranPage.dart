@@ -72,7 +72,7 @@ class VerseList extends StatelessWidget {
               quran.getSurahNameArabic(message),
               style: TextStyle(color: Colors.white, fontSize: 40.0),
             ),
-          ),
+          ),  
         ), 
         Container(
           height: MediaQuery.of(context).size.height - 180, // Adjust height as needed
