@@ -18,7 +18,8 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(quran.getSurahNameArabic(widget.message)),
+        backgroundColor: Colors.black, // Change this color to your desired color
+
       ),
       body: SafeArea(
         child: Padding(
@@ -66,14 +67,21 @@ class VerseList extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 100.0,
-          color: Colors.blue,
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            image: DecorationImage(
+              image: NetworkImage("https://clipart-library.com/images/ki8ok46AT.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Center(
             child: Text(
               quran.getSurahNameArabic(message),
-              style: TextStyle(color: Colors.white, fontSize: 40.0),
+              style: TextStyle(color: Colors.black, fontSize: 40.0),
             ),
-          ),  
-        ), 
+          ),
+        ),
+
         Container(
           height: MediaQuery.of(context).size.height - 180, // Adjust height as needed
           child: Stack(
@@ -99,7 +107,7 @@ class VerseList extends StatelessWidget {
                       child: Text(
                         quran.getVerse(message, verseIndex, verseEndSymbol: true),
                         textAlign: TextAlign.right,
-                        style: TextStyle(color: Colors.black, fontSize: 20),
+                        style: TextStyle(color: Colors.black, fontSize: 25),
                       ),
                     ),
                   );
