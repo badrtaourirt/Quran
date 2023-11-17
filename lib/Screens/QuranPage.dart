@@ -25,7 +25,7 @@ class _SecondPageState extends State<SecondPage> {
         child: Padding(
           padding: const EdgeInsets.all(0.0),
           child: PageView.builder(
-            itemCount: (quran.getVerseCount(widget.message) / itemsPerPage).ceil(),
+            itemCount: (quran.getVerseCount(widget.message)).ceil(),
             itemBuilder: (context, index) {
               final startVerseIndex = index * itemsPerPage + 1;
               final endVerseIndex = (index + 1) * itemsPerPage;
@@ -104,6 +104,7 @@ class VerseList extends StatelessWidget {
                   return Center(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+
                       child: Text(
                         quran.getVerse(message, verseIndex, verseEndSymbol: true),
                         textAlign: TextAlign.right,
