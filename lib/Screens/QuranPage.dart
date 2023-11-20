@@ -99,7 +99,7 @@ class VerseList extends StatelessWidget {
                 padding: EdgeInsets.only(top: 50.0, bottom: 50.0), // Adjust padding as needed
                 itemCount: endVerseIndex - startVerseIndex + 1,
                 itemBuilder: (context, index) {
-                  final verseIndex = startVerseIndex + index;
+                  final verseIndex = startVerseIndex + index; 
 
                   return Center(
                     child: Padding(
