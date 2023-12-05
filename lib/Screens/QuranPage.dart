@@ -89,7 +89,7 @@ class VerseList extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(
+                  image: DecorationImage( 
                     image: NetworkImage("https://clipart-library.com/images/ki8ok46AT.jpg"),
                     fit: BoxFit.cover,
                   ),
